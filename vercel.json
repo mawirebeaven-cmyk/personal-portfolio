@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "personal-portfolio",
+  "builds": [
+    {
+      "src": "images/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/images/$1"
+    }
+  ]
+}
