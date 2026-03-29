@@ -1,0 +1,62 @@
+body{
+font-family: Arial;
+margin:0;
+padding:0;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+background:#ca519c;
+color:white;
+padding:10px;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+}
+
+nav ul li{
+margin:10px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+}
+
+.hero{
+text-align:center;
+padding:50px;
+}
+
+.hero img{
+width:150px;
+border-radius:50%;
+}
+
+.btn{
+background:#ff00c8;
+color:white;
+padding:10px 20px;
+text-decoration:none;
+}
+
+.project-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.card{
+border:1px solid #ddd;
+padding:20px;
+}
+.about-img{
+    width:200px;
+    border-radius:10px;
+    display: block;
+    margin:20px auto;
+}
