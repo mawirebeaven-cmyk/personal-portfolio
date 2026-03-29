@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Blog - Herbalife Business</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.blog-container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 30px;
+}
+
+.blog-post {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 15px;
+  padding: 40px;
+  margin-bottom: 30px;
+  box-shadow: 0 0 20px rgba(255, 20, 147, 0.3);
+  transition: all 0.3s;
+}
+
+.blog-post:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
+}
+
+.blog-date {
+  color: var(--accent-tertiary);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.blog-title {
+  color: var(--text-primary);
+  font-size: 32px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.blog-content {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.blog-content strong {
+  color: var(--text-primary);
+}
+
+.highlight {
+  background: rgba(255, 20, 147, 0.2);
+  padding: 20px;
+  border-left: 4px solid var(--border-color);
+  border-radius: 5px;
+  margin: 20px 0;
+  color: var(--text-primary);
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+}
+
+.benefits-list li {
+  padding: 10px 0;
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: 30px;
+}
+
+.benefits-list li::before {
+  content: '✓';
+  color: #00ff99;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  font-size: 18px;
+}
+
+.cta-section {
+  background: linear-gradient(45deg, rgba(255, 20, 147, 0.1), rgba(255, 0, 255, 0.1));
+  border: 2px solid var(--border-color);
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.cta-section h3 {
+  color: var(--text-primary);
+  font-size: 24px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cta-section p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.cta-btn {
+  display: inline-block;
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
+  padding: 15px 40px;
+  text-decoration: none;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
+}
+
+.cta-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px var(--border-color);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+<h1>My Portfolio</h1>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="projects.html">Projects</a></li>
+<li><a href="calculator.html">Calculator</a></li>
+<li><a href="todo.html">Todo</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+<button id="theme-toggle" class="theme-toggle">☀️ Light Mode</button>
+</nav>
+</header>
+
+<div class="blog-container">
+  
+  <div class="blog-post">
+    <div class="blog-date">March 29, 2026</div>
+    <h2 class="blog-title">Welcome to My Herbalife Journey</h2>
+    
+    <div class="blog-content">
+      <p>Hey everyone! 👋 Welcome to my blog where I'll be sharing my journey as a <strong>Herbalife Distributor</strong> and insights into the amazing world of nutritious products and wellness.</p>
+      
+      <p>I'm excited to introduce you to something that's transformed my life and can transform yours too - <strong>Herbalife's comprehensive line of nutrition and skincare products</strong>.</p>
+    </div>
+
+    <div class="highlight">
+      <strong>What is Herbalife?</strong>
+      <p style="margin: 10px 0 0 0;">Herbalife is a global company dedicated to manufacturing and selling premium nutritious products for weight management, including weight loss, weight gain, and muscle gain solutions, plus advanced skincare products.</p>
+    </div>
+  </div>
+
+  <div class="blog-post">
+    <div class="blog-date">March 28, 2026</div>
+    <h2 class="blog-title">The Power of Nutrition: Transform Your Life</h2>
+    
+    <div class="blog-content">
+      <p>Whether you're looking to <strong>lose weight</strong>, <strong>gain muscle</strong>, or simply achieve your ideal figure, Herbalife has scientifically formulated products designed to help you reach your health and fitness goals.</p>
+      
+      <p>Our product range includes:</p>
+    </div>
+
+    <ul class="benefits-list">
+      <li><strong>Weight Management Solutions</strong> - Nutritious meal replacements and metabolism boosters</li>
+      <li><strong>Protein & Fitness Products</strong> - Build lean muscle and improve athletic performance</li>
+      <li><strong>Nutritional Supplements</strong> - Essential vitamins and minerals for optimal health</li>
+      <li><strong>Premium Skincare Range</strong> - Beautiful skin starts with the right products</li>
+    </ul>
+
+    <div class="blog-content" style="margin-top: 20px;">
+      <p>Each product is formulated with premium ingredients backed by scientific research to ensure maximum effectiveness and safety.</p>
+    </div>
+  </div>
+
+  <div class="blog-post">
+    <div class="blog-date">March 27, 2026</div>
+    <h2 class="blog-title">Join the Herbalife Community</h2>
+    
+    <div class="blog-content">
+      <p>If you're interested in:</p>
+    </div>
+
+    <ul class="benefits-list">
+      <li>Achieving your personal health and fitness goals</li>
+      <li>Getting premium nutrition at competitive prices</li>
+      <li>Building your own Herbalife distribution network</li>
+      <li>Reaching financial independence through entrepreneurship</li>
+      <li>Helping others transform their lives</li>
+    </ul>
+
+    <div class="blog-content" style="margin-top: 20px;">
+      <p><strong>Just hit me up!</strong> I'm here to answer any questions you might have about Herbalife products and the incredible opportunities available.</p>
+    </div>
+
+    <div class="highlight">
+      <strong>Don't keep it to yourself!</strong>
+      <p style="margin: 10px 0 0 0;">Tell a friend to tell a friend! Join our growing community of Herbalife distributors and customers who are already experiencing amazing results.</p>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>Ready to Get Started?</h3>
+    <p>Whether you want to order products for yourself or explore business opportunities, I'd love to connect with you!</p>
+    <a href="contact.html" class="cta-btn">Contact Me Now</a>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

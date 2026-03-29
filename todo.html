@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Todo App</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.todo-container {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 30px;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(255, 20, 147, 0.3);
+}
+
+.todo-input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 15px;
+  background: rgba(255, 20, 147, 0.05);
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.todo-input:focus {
+  outline: none;
+  box-shadow: 0 0 15px var(--border-color);
+  background: rgba(255, 20, 147, 0.1);
+}
+
+.todo-input::placeholder {
+  color: rgba(255, 20, 147, 0.5);
+}
+
+.add-btn {
+  padding: 15px 30px;
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  font-size: 14px;
+}
+
+.add-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--border-color);
+}
+
+.todo-list {
+  list-style: none;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: rgba(255, 20, 147, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: all 0.3s;
+}
+
+.todo-item:hover {
+  background: rgba(255, 20, 147, 0.1);
+  box-shadow: 0 0 10px rgba(255, 20, 147, 0.3);
+}
+
+.todo-item.completed {
+  opacity: 0.6;
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+.todo-text {
+  flex: 1;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.todo-btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+}
+
+.complete-btn {
+  background: linear-gradient(45deg, #00cc88, #00ff99);
+  color: white;
+}
+
+.complete-btn:hover {
+  box-shadow: 0 0 10px #00ff99;
+  transform: scale(1.05);
+}
+
+.delete-btn {
+  background: rgba(255, 69, 0, 0.8);
+  color: white;
+}
+
+.delete-btn:hover {
+  background: rgba(255, 69, 0, 1);
+  transform: scale(1.05);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+<h1>My Portfolio</h1>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="projects.html">Projects</a></li>
+<li><a href="calculator.html">Calculator</a></li>
+<li><a href="todo.html">Todo</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+<button id="theme-toggle" class="theme-toggle">☀️ Light Mode</button>
+</nav>
+</header>
+
+<div class="todo-container">
+  <h2 style="color: var(--text-primary); text-align: center; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px;">My Todo App</h2>
+  
+  <div class="todo-input-group">
+    <input type="text" class="todo-input" id="todoInput" placeholder="Add a new task..." onkeypress="handleKeyPress(event)">
+    <button class="add-btn" onclick="addTodo()">Add</button>
+  </div>
+
+  <ul class="todo-list" id="todoList"></ul>
+  
+  <div class="empty-state" id="emptyState" style="display: none;">
+    <p>✨ No tasks yet! Add one to get started.</p>
+  </div>
+</div>
+
+<script>
+let todos = JSON.parse(localStorage.getItem('todos')) || [];
+
+function renderTodos() {
+  const todoList = document.getElementById('todoList');
+  const emptyState = document.getElementById('emptyState');
+  
+  todoList.innerHTML = '';
+  
+  if (todos.length === 0) {
+    emptyState.style.display = 'block';
+    return;
+  }
+  
+  emptyState.style.display = 'none';
+  
+  todos.forEach((todo, index) => {
+    const li = document.createElement('li');
+    li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+    li.innerHTML = `
+      <span class="todo-text">${escapeHtml(todo.text)}</span>
+      <div class="todo-actions">
+        <button class="todo-btn complete-btn" onclick="toggleTodo(${index})">${todo.completed ? '↩ Undo' : '✓ Done'}</button>
+        <button class="todo-btn delete-btn" onclick="deleteTodo(${index})">Delete</button>
+      </div>
+    `;
+    todoList.appendChild(li);
+  });
+}
+
+function addTodo() {
+  const input = document.getElementById('todoInput');
+  const text = input.value.trim();
+  
+  if (text === '') return;
+  
+  todos.push({ text, completed: false });
+  localStorage.setItem('todos', JSON.stringify(todos));
+  input.value = '';
+  renderTodos();
+}
+
+function toggleTodo(index) {
+  todos[index].completed = !todos[index].completed;
+  localStorage.setItem('todos', JSON.stringify(todos));
+  renderTodos();
+}
+
+function deleteTodo(index) {
+  todos.splice(index, 1);
+  localStorage.setItem('todos', JSON.stringify(todos));
+  renderTodos();
+}
+
+function handleKeyPress(event) {
+  if (event.key === 'Enter') {
+    addTodo();
+  }
+}
+
+function escapeHtml(text) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, m => map[m]);
+}
+
+renderTodos();
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>

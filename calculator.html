@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calculator</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.calculator-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(255, 20, 147, 0.3);
+}
+
+.calculator-display {
+  background: rgba(255, 20, 147, 0.1);
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: right;
+  font-size: 32px;
+  color: var(--text-primary);
+  word-wrap: break-word;
+  word-break: break-all;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.calc-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.calc-btn {
+  padding: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border: 2px solid var(--border-color);
+  background: rgba(255, 20, 147, 0.1);
+  color: var(--text-primary);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.calc-btn:hover {
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+  transform: scale(1.05);
+  box-shadow: 0 0 15px var(--border-color);
+}
+
+.calc-btn.operator {
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
+}
+
+.calc-btn.equals {
+  grid-column: span 2;
+  background: linear-gradient(45deg, var(--accent-tertiary), #00ccff);
+  color: white;
+}
+
+.calc-btn.clear {
+  grid-column: span 2;
+  background: rgba(255, 69, 0, 0.7);
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+<h1>My Portfolio</h1>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="projects.html">Projects</a></li>
+<li><a href="calculator.html">Calculator</a></li>
+<li><a href="todo.html">Todo</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+<button id="theme-toggle" class="theme-toggle">☀️ Light Mode</button>
+</nav>
+</header>
+
+<div class="calculator-container">
+  <h2 style="color: var(--text-primary); text-align: center; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">Calculator</h2>
+  <div class="calculator-display" id="display">0</div>
+  <div class="calc-buttons">
+    <button class="calc-btn clear" onclick="clearDisplay()">Clear</button>
+    <button class="calc-btn operator" onclick="appendOperator('/')">/</button>
+    <button class="calc-btn operator" onclick="appendOperator('*')">×</button>
+    
+    <button class="calc-btn" onclick="appendNumber('7')">7</button>
+    <button class="calc-btn" onclick="appendNumber('8')">8</button>
+    <button class="calc-btn" onclick="appendNumber('9')">9</button>
+    <button class="calc-btn operator" onclick="appendOperator('-')">−</button>
+    
+    <button class="calc-btn" onclick="appendNumber('4')">4</button>
+    <button class="calc-btn" onclick="appendNumber('5')">5</button>
+    <button class="calc-btn" onclick="appendNumber('6')">6</button>
+    <button class="calc-btn operator" onclick="appendOperator('+')">+</button>
+    
+    <button class="calc-btn" onclick="appendNumber('1')">1</button>
+    <button class="calc-btn" onclick="appendNumber('2')">2</button>
+    <button class="calc-btn" onclick="appendNumber('3')">3</button>
+    <button class="calc-btn operator" onclick="appendNumber('.')">.</button>
+    
+    <button class="calc-btn" onclick="appendNumber('0')" style="grid-column: span 2;">0</button>
+    <button class="calc-btn equals" onclick="calculateResult()">=</button>
+  </div>
+</div>
+
+<script>
+let display = document.getElementById('display');
+let calculation = '';
+
+function appendNumber(num) {
+  if (calculation === '0' && num !== '.') {
+    calculation = num;
+  } else if (num === '.' && calculation.includes('.')) {
+    return;
+  } else {
+    calculation += num;
+  }
+  updateDisplay();
+}
+
+function appendOperator(op) {
+  if (calculation === '') return;
+  calculation += op;
+  updateDisplay();
+}
+
+function calculateResult() {
+  try {
+    calculation = eval(calculation).toString();
+    updateDisplay();
+  } catch {
+    calculation = 'Error';
+    updateDisplay();
+    setTimeout(() => {
+      clearDisplay();
+    }, 1500);
+  }
+}
+
+function clearDisplay() {
+  calculation = '';
+  display.textContent = '0';
+}
+
+function updateDisplay() {
+  display.textContent = calculation || '0';
+}
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
